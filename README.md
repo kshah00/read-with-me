@@ -22,7 +22,35 @@ relevant passages retrieved from anywhere in the document.
 - `ReadWithMe/AI/` — `AzureConfig`, streaming `ChatClient`, `Transcriber`, `AudioRecorder`.
 - `ReadWithMe/RAG/` — `DocumentIndex` (on-device chunk embedding + retrieval).
 
-## Build & run
+## Install
+
+### Homebrew (recommended)
+
+```sh
+brew tap kshah00/tap
+brew install --cask --no-quarantine read-with-me
+```
+
+`--no-quarantine` lets the app launch without a Gatekeeper prompt — it is
+Developer ID–signed but not notarized. If Homebrew asks you to trust the tap,
+run `brew trust kshah00/tap` first.
+
+### Manual (DMG)
+
+Download the signed DMG from the
+[latest release](https://github.com/kshah00/read-with-me/releases/latest),
+open it, and drag **ReadWithMe** to Applications. On first launch, right-click
+the app → **Open** (or run `xattr -dr com.apple.quarantine /Applications/ReadWithMe.app`).
+
+## First run — bring your own key
+
+ReadWithMe ships with **no credentials**. On first launch it opens Settings
+(⌘,) where you enter your own **Azure OpenAI** endpoint, API key, and deployment
+names. The API key is stored in the **macOS Keychain**; everything else in
+`UserDefaults`. Nothing is written to the app bundle, and the key never leaves
+your Mac except to call your own endpoint.
+
+## Build from source
 
 ```sh
 xcodegen generate
@@ -34,8 +62,10 @@ Or just open `ReadWithMe.xcodeproj` in Xcode and hit Run.
 
 ## Configuration
 
-Credentials live in `Config/Secrets.plist` (gitignored). Copy `Secrets.example.plist`
-to `Secrets.plist` and fill in your Azure OpenAI base URL, key, and deployment names.
+Enter your Azure OpenAI credentials in-app via **Settings (⌘,)** — the key is
+stored in the Keychain. (For local development you may optionally drop a
+gitignored `Config/Secrets.plist`, copied from `Secrets.example.plist`, and add
+it to the app target; it is used only as a fallback and never committed.)
 
 ## Using it
 
