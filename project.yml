@@ -1,0 +1,39 @@
+name: ReadWithMe
+options:
+  bundleIdPrefix: com.kshah.readwithme
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.9"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: C85X7E88A8
+    SWIFT_EMIT_LOC_STRINGS: NO
+
+targets:
+  ReadWithMe:
+    type: application
+    platform: macOS
+    sources:
+      - path: ReadWithMe
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.kshah.readwithme
+        PRODUCT_NAME: ReadWithMe
+        INFOPLIST_FILE: ReadWithMe/Info.plist
+        CODE_SIGN_ENTITLEMENTS: ReadWithMe/ReadWithMe.entitlements
+        GENERATE_INFOPLIST_FILE: NO
+        ENABLE_HARDENED_RUNTIME: YES
+        TARGETED_DEVICE_FAMILY: ""
+
+schemes:
+  ReadWithMe:
+    build:
+      targets:
+        ReadWithMe: all
+    run:
+      config: Debug
